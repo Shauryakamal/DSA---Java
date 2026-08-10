@@ -1,0 +1,325 @@
+linked list is a linear data structure Jahan pr elements continuous memory locations par necessarily stored nahi hote 
+
+Array mein:
+
+[10][20][30][40]
+
+in linked list har ek element ko node kehte hai 
+
+10 → 20 → 30 → 40 → null
+
+What is a node??
+
+In singly linked list a node is generally do cheezein hoti hai 
+
+
+┌──────────┬──────────┐
+│   data   │   next   │
+└──────────┴──────────┘
+
+Example :: 10 → 20 → 30 → null
+
+Node 10:
+
+data : 10 
+next : Address reference of node 20
+
+Node 20:
+
+data: 20
+next: address reference of node 30
+
+node 30:
+next: null
+
+3. Java mein Node
+
+hum khud node class bana skte hai 
+
+class Node{
+int data;
+int next;
+Node(int data){
+this.data = data;
+this.next = next;
+}
+}
+
+now yahan pr next ka mtlb hai ki yeh dusre node ka reference store krega...
+
+
+now 
+
+4. What is head?
+
+Linked list ka starting point is head.
+
+head
+ ↓
+10 → 20 → 30 → null
+
+
+now head actually first node ko point/reference karta hai...
+
+Agar 
+
+head = null;
+
+to linked list empty hai....
+
+
+5. What is tail?
+
+Last node ko generally tail kehte hai...
+
+
+head                    tail
+ ↓                        ↓
+10 → 20 → 30 → 40 → null
+
+Last node ka
+
+next == null hota hai
+
+
+6. What is traversal and how to do it?
+
+Array mein we use 
+
+for(int i =0; i<arr.length; i++)
+
+Linked list mei index ni hota toh hum 
+
+"next" follow karte hai 
+
+head
+ ↓
+10 → 20 → 30 → 40 → null
+
+Concept = 
+
+current = head;
+
+current
+   ↓
+  10 → 20 → 30 → 40 → null
+
+then agar
+
+current = current.next;
+
+now 
+
+      current
+         ↓
+10 → 20 → 30 → 40 → null
+
+again 
+current = current.next;
+
+aur eventually 
+
+10 → 20 → 30 → 40 → null
+                  ↑
+                current
+
+now then
+
+current = current.next;
+
+now finally 
+
+current = null;
+
+Traversal Complete...
+
+
+7.Linked List vs Array?
+
+Array                                   Linked List
+index based	node based
+random access possible 	no random access
+arr[i]-> O(1)	ith node tak jana -> O(n)
+fixed size traditionally	dynamic size
+insertion/deletion middle mein expensive	easier agar reference ho toh
+
+Contiguous memory concept 	nodes can be scattered in memory
+
+
+
+8. Important Complexity Access
+
+Array:
+
+O(1)
+
+Linked List:
+
+O(n)
+
+Kyunki agar 5th node chahiye, head se:
+
+1 → 2 → 3 → 4 → 5
+
+travel karna padega.
+
+
+Search
+
+O(n)
+
+Worst case last node tak jaana padega.
+
+Insert at Head
+O(1)
+
+Example:
+
+Before:
+
+10 → 20 → 30
+
+Insert 5:
+
+5 → 10 → 20 → 30
+
+Bas references adjust karne hain.
+
+Delete at head
+
+O(1)
+
+simply head ko next node pr move krdo 
+
+head = head.next;
+
+
+9. Singly Linked List
+
+
+10 → 20 → 30 → null
+
+Har node ke paas:
+
+data + next
+
+10. Doubly Linked List
+
+Doubly mein node ke paas previous + data + next hota hai.
+
+null ← 10 ⇄ 20 ⇄ 30 → null
+
+Node:
+
+┌──────────┬──────────┬──────────┐
+│   prev   │   data   │   next   │
+└──────────┴──────────┴──────────┘
+
+Isse backward bhi traverse kar sakte hain.
+
+11. Circular Linked List
+
+Last node null ko point nahi karta.
+
+Wapas first node ko point karta hai:
+
+      ┌──────────────────┐
+      ↓                  │
+10 → 20 → 30 → 40 ───────┘
+↑
+head
+
+
+
+head
+ ↓
+[10 | •] ──→ [20 | •] ──→ [30 | null]
+
+"•" this typically means reference to the next node "next"
+
+proper traversal technique in nodes 
+
+
+Node current = head;
+
+while(current!=head){
+System.out.println(current.data);
+current = current.next;
+}
+
+output::
+
+10
+ ↓
+20
+ ↓
+30
+ ↓
+null
+
+Full Traversal
+
+Node current = head;
+
+while(current!= head){
+System.out.println(current.data);
+current = current.next;
+}
+
+flow
+
+current = 10
+   ↓
+print 10
+   ↓
+current = current.next
+   ↓
+current = 20
+   ↓
+print 20
+   ↓
+current = 30
+   ↓
+print 30
+   ↓
+current = null
+   ↓
+loop stops
+
+
+important distinction
+
+=    // assignment
+==   // equality check
+!=   // not equal
+
+
+if(head == null){
+    head = new Node(data);
+}
+
+
+🔥 Important distinction:
+
+Traversal/printing → while(current != null)
+Last node find karna → while(current.next != null)
+
+
+🧠 One-line memory trick:
+
+current != null → node ko process karna hai.
+
+current.next != null → current ke baad kuch karna hai.
+
+
+
+
+Delete a node → uske previous node tak jao → previous ka next, deleted node ke next par laga do.
+
+10 → 20 → 30 → 40
+     ↑    ↑
+   prev  delete
+
+20.next = 40
+
+10 → 20 → 40
