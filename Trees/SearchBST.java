@@ -1,0 +1,60 @@
+package Trees;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode() {
+    }
+
+    TreeNode(int val) {
+        this.val = val;
+    }
+}
+
+public class SearchBST {
+    public TreeNode searchBST(TreeNode root, int val) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val == val) {
+            return root;
+        }
+        if (val < root.val) {
+            return searchBST(root.left, val);
+        }
+        return searchBST(root.right, val);
+    }
+
+    public static void main(String[] args) {
+
+        SearchBST obj = new SearchBST();
+
+        /*
+         * 4
+         * / \
+         * 2 7
+         * / \
+         * 1 3
+         */
+
+        TreeNode root = new TreeNode(4);
+
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(7);
+
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(3);
+
+        int val = 2;
+
+        TreeNode result = obj.searchBST(root, val);
+
+        if (result != null) {
+            System.out.println("Found: " + result.val);
+        } else {
+            System.out.println("Value not found");
+        }
+    }
+}
